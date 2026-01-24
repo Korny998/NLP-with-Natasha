@@ -92,7 +92,7 @@ The script will automatically:
     * weights=[embedding_matrix] – Pre-trained word embeddings loaded from Navec.
 - This layer is frozen (trainable=False) to keep embeddings fixed during training.
 
-2. nBatchNormalization
+2. BatchNormalization
 - Normalizes the inputs to improve convergence.
 
 3. Dense Layer
