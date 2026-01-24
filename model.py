@@ -5,12 +5,13 @@ from dataset import embedding_matrix
 
 
 def build_model():
+    """Build and return the text classification neural network."""
     return models.Sequential([
         layers.Embedding(
             MAX_WORDS, 
             EMBEDDING_DIM,
             input_length=WIN_SIZE,
-            weights=embedding_matrix
+            weights=[embedding_matrix]
         ),
         
         layers.BatchNormalization(),

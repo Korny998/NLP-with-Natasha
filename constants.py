@@ -1,23 +1,28 @@
 import os
 
 
-PROJECT_DIR = os.path.dirname('__file__')
+# Root directory of the project
+PROJECT_DIR: str = os.path.dirname(__file__)
 
+# List of target classes (authors)
 CLASS_LIST = [
     'Dostoevsky', 'Tolstoy', 'Turgenev',
     'Chekhov', 'Lermontov', 'Pushkin'
 ]
 
-EMBEDDING_DIM = 300
-FILTERS = (
+# Setting for text proccesing
+EMBEDDING_DIM: int = 300
+FILTERS: str = (
     '!"#$%&()*+,-–—./…:;<=>?@[\\]^_`{|}~«»\t\n\xa0\ufeff'
 )
-MAX_WORDS = 10000
-MAX_SEQ = 40000
+MAX_WORDS: int = 10000
+MAX_SEQ: int = 40000
 
-WIN_SIZE = 1000
-WIN_STEP = 100
+# Sliding window parameters
+WIN_SIZE: int = 1000
+WIN_STEP: int = 100
 
-BATCH_SIZE = 64
-EPOCHS = 50
-VALIDATION_SPLIT = 0.1
+# Training configuration
+BATCH_SIZE: int = 64
+EPOCHS: int = 50
+VALIDATION_SPLIT: float = 0.1

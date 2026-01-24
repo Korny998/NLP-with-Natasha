@@ -21,14 +21,14 @@ data_path = utils.get_file(
     'https://storage.yandexcloud.net/academy.ai/russian_literature.zip'
 )
 
-data_dir = os.path.join(PROJECT_DIR, 'dataset')
+data_dir: str = os.path.join(PROJECT_DIR, 'dataset')
 os.makedirs(data_dir, exist_ok=True)
 
 if not os.listdir(data_dir):
     with zipfile.ZipFile(data_path, 'r') as z:
         z.extractall(data_dir)
 
-all_texts = {}
+all_texts: dict = {}
 
 for author in CLASS_LIST:
     all_texts[author] = ''
@@ -56,6 +56,7 @@ seq_train_balance = [seq_train[cls][:MAX_SEQ] for cls in range(len(CLASS_LIST))]
 
 
 def seq_split(sequence, win_size: int, win_step: int) -> list:
+    """Split a token sequence into overlapping fixed-length windows."""
     return [
         sequence[i:i + win_size] for i in range(
             0, len(sequence) - win_size + 1, win_step
@@ -70,31 +71,32 @@ def seq_vectorize(
     win_size,
     step
 ):
+    """Convert tokenized text sequences into training and testing datasets."""
     assert len(seq_list) == len(class_list)
-    
+
     x_train, y_train, x_test, y_test = [], [], [], []
     num_classes = len(class_list)
-    
+
     for cls in range(num_classes):
         sequence = seq_list[cls]
         gate = int(len(sequence) * (1 - test_split))
-        
+
         train_window = seq_split(sequence[:gate], win_size, step)
         test_window = seq_split(sequence[gate:], win_size, step)
-        
+
         if not train_window:
             continue
-        
+
         x_train.extend(train_window)
         x_test.extend(test_window)
-        
+
         y_train.extend(
             [utils.to_categorical(cls, num_classes)] * len(train_window)
         )
         y_test.extend(
             [utils.to_categorical(cls, num_classes)] * len(test_window)
         )
-    
+
     return (
         np.array(x_train, dtype=np.int32),
         np.array(y_train, dtype=np.float32),
