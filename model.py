@@ -1,4 +1,4 @@
-from tensorflow.keras import models, layers
+from tensorflow.keras import layers, models
 
 from constants import CLASS_LIST, EMBEDDING_DIM, MAX_WORDS, WIN_SIZE
 from dataset import embedding_matrix
