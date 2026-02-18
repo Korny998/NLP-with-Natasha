@@ -2,9 +2,9 @@ import os
 import zipfile
 
 import glob
-from tensorflow.keras import utils
 import numpy as np
 from navec import Navec
+from tensorflow.keras import utils
 from tensorflow.keras.preprocessing.text import Tokenizer
 
 from constants import (
